@@ -13,18 +13,42 @@ import matplotlib.pyplot as plt
 labels = ['Hígido', 'Não Hígido']
 sizes_superior = [92.86, 7.14]
 sizes_inferior = [92.86, 7.14]
-colors = ['#003366','#ff6666']
+colors = ['#003366', '#ff6666']  # Azul escuro e vermelho claro
+
+# Função para customizar a cor do texto de acordo com o valor
+def make_autopct(values):
+    def my_autopct(pct):
+        total = sum(values)
+        val = round(pct * total / 100.0, 2)
+        # Se o valor for o maior (Hígido), retorna com cor branca
+        if val == max(values):
+            return f'%1.1f%%' % pct
+        else:
+            return f'%1.1f%%' % pct
+    return my_autopct
 
 # Gráfico da Arcada Superior
 plt.figure(figsize=(12, 6))
 
 plt.subplot(1, 2, 1)
-plt.pie(sizes_superior, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
+wedges, texts, autotexts = plt.pie(
+    sizes_superior, labels=labels, colors=colors, autopct=make_autopct(sizes_superior),
+    startangle=140, textprops={'color': 'black'}
+)
+# Muda a cor do texto da porcentagem da fatia hígida para branco
+autotexts[0].set_color('white')
+
 plt.title('Arcada Superior')
 
 # Gráfico da Arcada Inferior
 plt.subplot(1, 2, 2)
-plt.pie(sizes_inferior, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
+wedges, texts, autotexts = plt.pie(
+    sizes_inferior, labels=labels, colors=colors, autopct=make_autopct(sizes_inferior),
+    startangle=140, textprops={'color': 'black'}
+)
+# Muda a cor do texto da porcentagem da fatia hígida para branco
+autotexts[0].set_color('white')
+
 plt.title('Arcada Inferior')
 
 # Exibindo os gráficos
