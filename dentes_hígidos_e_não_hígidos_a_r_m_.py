@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 labels = ['Hígido', 'Não Hígido']
 sizes_superior = [92.86, 7.14]
 sizes_inferior = [92.86, 7.14]
-colors = ['#66b3ff','#ff6666']
+colors = ['#003366','#ff6666']
 
 # Gráfico da Arcada Superior
 plt.figure(figsize=(12, 6))
